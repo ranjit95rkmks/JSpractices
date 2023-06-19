@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body >
+    <script>;</script>
+    <p id="demo"></p>
+    <img id="myImg"  src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg"/>
+    <img title="Hello" src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681" onmouseover="this.src='https://www.ctvnews.ca/polopoly_fs/1.4037876!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg'" onmouseout="this.src='https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/12/11/naturo-monkey-selfie.jpg?w968h681'" />
+    
+
+
+<script>
+    document.onkeypress = keyPress ;
+    document.onclick = displayCoordinate;
+    
+    function displayCoordinate(event){
+        var xPos= event.clientX;
+        var yPos= event.clientY;
+        document.getElementsByTagName("p")[0].innerHTML = `X- position: ${xPos}. and Y- Position: ${yPos}.`;
+    }
+
+    function keyPress(event){
+        console.log(event.key);
+        alert("your pressed :" +event.key);
+
+    }
+
+    function mouseDown(event){
+        document.getElementById("myImg").src = "https://commons.wikimedia.org/wiki/File:Flag_of_Bangladesh.svg#/media/File:Flag_of_Bangladesh.jpg";
+    }
+
+</script>
+
+</body>
+</html>
