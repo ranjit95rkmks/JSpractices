@@ -10,36 +10,70 @@
 </head>
 
 <body>
-    <form name="myForm" onsubmit="return validateForm()">
-        <label>name</label></br>
-        <input type="text" name="name" /></br>
-        <label>Email</label></br>
-        <input type="email" name="email" /></br>
-        <label>Password</label></br>
-        <input type="password" name="password" /></br>
-        <label>Confrim Password</label></br>
-        <input type="password" name="com-password" /></br>
-        <button>submit</button>
-    </form>
-    <script>
-        function validateForm() {
-            let name = document.forms["myForm"]["name"].value;
-            var letters = /^[A-Za-z]+$/;
-            if (name == "") {
-                alert("Please Insert!");
-            }
-            else {
-                if (name.match(letters)) {
-                    alert(`your value ${name}`);
-                    return true; 
+    <form id="myForm">
+        <input type="text" id="name" placeholder="Name">
+        <span id="nameError" class="error"></span>
+        <br>
 
-                }
-                else {
-                    alert("enter only value");
-                }
+        <input type="email" id="email" placeholder="Email">
+        <span id="emailError" class="error"></span>
+        <br>
+
+        <input type="password" id="password" placeholder="Password">
+        <span id="passwordError" class="error"></span>
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Access form elements
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+
+            // Reset error messages
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            nameError.innerHTML = '';
+            emailError.innerHTML = '';
+            passwordError.innerHTML = '';
+
+            // Validation logic
+            if (nameInput.value === '') {
+                nameError.innerHTML = 'Name is required.';
+            }
+
+            if (emailInput.value === '') {
+                emailError.innerHTML = 'Email is required.';
+            } else if (!isValidEmail(emailInput.value)) {
+                emailError.innerHTML = 'Invalid email format.';
+            }
+
+            if (passwordInput.value === '') {
+                passwordError.innerHTML = 'Password is required.';
+            } else if (passwordInput.value.length < 8) {
+                passwordError.innerHTML = 'Password must be at least 8 characters long.';
+            }
+
+            // If no errors, submit the form
+            if (nameError.innerHTML === '' && emailError.innerHTML === '' && passwordError.innerHTML === '') {
+                event.target.submit();
             }
         }
 
+        function isValidEmail(email) {
+            // Email validation logic using regular expression
+            const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+            return emailRegex.test(email);
+        }
+
+        // Attach event listener to the form submission event
+        document.getElementById('myForm').addEventListener('submit', validateForm);
     </script>
 </body>
 
